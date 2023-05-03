@@ -20,7 +20,6 @@ import sys
 # Third-party libraries
 import numpy as np
 
-
 #### Define the quadratic and cross-entropy cost functions
 
 class QuadraticCost(object):
