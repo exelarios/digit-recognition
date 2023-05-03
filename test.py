@@ -27,27 +27,27 @@ training_data, validation_data, test_data = mnist_loader.load_data_wrapper()
 test_data = list(test_data)[873]
 
 # Grabs the image file
-image = Image.open("number.jpg").convert("L")
-image = ImageChops.invert(image)
-image.show()
+buffer = Image.open("number.jpg").convert("L")
+buffer = ImageChops.invert(buffer)
 
 # Grabs all the values and normalize each pixel value
-image = list(image.getdata())
+image = list(buffer.getdata())
 image = np.array(image)
 image = (image - np.min(image)) / (np.max(image) - np.min(image))
 
 # Flatten the image pixel values
 image = np.reshape(image, (784, 1))
 
-model = network2.load("digit.model")
+model = network2.load("model.json")
 output = model.feedforward(image)
 predict = np.argmax(output)
 
 print("The predicted digit for the inputted image is:", predict)
+buffer.show()
 
 '''
 Trains the model using Stochastic Gradient Descent
 '''
 # net = network2.Network([784, 30, 10], cost=network2.CrossEntropyCost)
 # net.SGD(training_data, 30, 10, 0.1, lmbda = 5.0 ,evaluation_data = validation_data, monitor_evaluation_accuracy=True)
-# net.save("network");
+# net.save("model.json");
